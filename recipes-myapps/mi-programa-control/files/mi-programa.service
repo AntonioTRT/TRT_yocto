@@ -1,0 +1,40 @@
+[Unit]
+Description=Mi Programa de Control Industrial TRT
+Documentation=https://github.com/AntonioTRT/TRT_yocto
+After=network.target multi-user.target
+Wants=network.target
+RequiredBy=trt-industrial.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+ExecStart=/usr/bin/python3 /usr/bin/mi-programa-control.py
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=always
+RestartSec=10
+StartLimitInterval=60
+StartLimitBurst=3
+
+# Variables de entorno
+Environment=PYTHONPATH=/usr/lib/python3/site-packages
+Environment=TRT_CONFIG=/etc/trt/config.json
+Environment=TRT_DATA_DIR=/opt/trt/mi-programa/data
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=trt-control
+
+# Seguridad
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ReadWritePaths=/opt/trt /var/log/trt /tmp
+
+# Watchdog
+WatchdogSec=30
+
+[Install]
+WantedBy=multi-user.target
+Alias=trt-control.service
