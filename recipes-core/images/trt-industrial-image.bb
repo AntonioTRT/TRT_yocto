@@ -6,6 +6,7 @@ require trt-base-image.bb
 IMAGE_INSTALL += "\
     packagegroup-trt-base-industrial \
     mi-programa-control \
+    pin-monitor \
     modbus-tools \
     nodejs \
     node-red \

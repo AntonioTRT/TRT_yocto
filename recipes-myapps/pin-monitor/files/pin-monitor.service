@@ -1,0 +1,43 @@
+[Unit]
+Description=TRT Pin Monitor - Monitor de pines industrial
+Documentation=https://github.com/AntonioTRT/TRT_yocto
+After=network.target pin-config.service
+Wants=network.target
+Requires=pin-config.service
+
+[Service]
+Type=simple
+User=trt
+Group=trt
+WorkingDirectory=/opt/trt/pin-monitor
+Environment=PYTHONPATH=/opt/trt/pin-monitor:/usr/bin
+ExecStartPre=/bin/sleep 5
+ExecStart=/usr/bin/python3 /usr/bin/monitor-pins.py
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=always
+RestartSec=10
+StartLimitInterval=60
+StartLimitBurst=3
+
+# Variables de entorno
+Environment=TRT_CONFIG=/etc/trt/pin-monitor-config.json
+Environment=TRT_DATA_DIR=/opt/trt/data
+Environment=TRT_LOG_DIR=/opt/trt/logs
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=trt-pin-monitor
+
+# Seguridad
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ReadWritePaths=/opt/trt /var/log/trt /tmp /sys/class/gpio /dev/gpiomem
+
+# Watchdog
+WatchdogSec=60
+
+[Install]
+WantedBy=multi-user.target
+Alias=pin-monitor.service

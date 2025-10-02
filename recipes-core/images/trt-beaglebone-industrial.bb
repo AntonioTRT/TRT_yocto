@@ -20,6 +20,7 @@ IMAGE_INSTALL += "\
     adafruit-beaglebone-io-python \
     beaglebone-universal-io \
     mi-programa-control \
+    pin-monitor \
 "
 
 # Real-time kernel for industrial applications

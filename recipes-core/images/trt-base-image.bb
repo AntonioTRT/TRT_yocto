@@ -7,6 +7,9 @@ IMAGE_INSTALL = "\
     packagegroup-core-boot \
     packagegroup-trt-base-base \
     packagegroup-trt-base-connectivity \
+    trt-config \
+    arduino-drivers \
+    custom-drivers \
     ${CORE_IMAGE_EXTRA_INSTALL} \
 "
 
@@ -26,8 +29,8 @@ set_permissions() {
         sed -i 's/#PermitRootLogin.*/PermitRootLogin yes/' ${IMAGE_ROOTFS}/etc/ssh/sshd_config
     fi
     
-    # Set default root password (change in production!)
-    echo 'root:trt123' | chpasswd -R ${IMAGE_ROOTFS}
+    # Set default root password: 2020
+    echo 'root:2020' | chpasswd -R ${IMAGE_ROOTFS}
 }
 
 ROOTFS_POSTPROCESS_COMMAND += "set_permissions; "

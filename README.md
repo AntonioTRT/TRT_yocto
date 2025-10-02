@@ -167,6 +167,12 @@ bitbake trt-industrial-image
 bitbake trt-development-image
 ```
 
+**Credenciales por defecto:**
+- Usuario: `root`
+- Contraseña: `2020`
+- Usuario desarrollador: `developer`
+- Contraseña desarrollador: `2020`
+
 ## Scripts de Automatización
 
 ### Build para todas las plataformas

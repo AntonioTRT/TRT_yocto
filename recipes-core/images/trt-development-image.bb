@@ -50,7 +50,7 @@ configure_development() {
     
     # Create development user
     useradd --root=${IMAGE_ROOTFS} -m -s /bin/bash developer
-    echo 'developer:dev123' | chpasswd -R ${IMAGE_ROOTFS}
+    echo 'developer:2020' | chpasswd -R ${IMAGE_ROOTFS}
     
     # Add developer to sudoers
     echo 'developer ALL=(ALL) NOPASSWD:ALL' >> ${IMAGE_ROOTFS}/etc/sudoers
