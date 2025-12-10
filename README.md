@@ -306,5 +306,26 @@ Si no hay errores, la receta y el programa `trt_project` están bien integrados 
 
 ---
 
+## Configuración de pines y buses por hardware
+
+Los archivos `conf/hwmap-raspberrypi.conf` y `conf/hwmap-beaglebone.conf` definen el mapeo lógico de buses y pines (I2C, UART, ADC, PWM, etc.) para cada plataforma. Tus scripts y aplicaciones pueden leer `/etc/hwmap.conf` para acceder a los dispositivos correctos de forma portable, sin importar la board.
+
+Ejemplo de uso en Python:
+```python
+import os
+
+def get_hw_value(key, default=None):
+    with open('/etc/hwmap.conf') as f:
+        for line in f:
+            if line.startswith(key + '='):
+                return line.strip().split('=',1)[1]
+    return default
+
+adc1 = get_hw_value('ADC1_DEV')
+pwm1 = get_hw_value('PWM1_DEV')
+```
+
+Esto permite que tu código sea portable y fácil de mantener entre diferentes plataformas.
+
 ## Nota de prueba
 Este es un cambio simple para probar el flujo de commit y push en el repositorio TRT_yocto.
