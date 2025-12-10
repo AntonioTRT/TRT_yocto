@@ -262,3 +262,46 @@ bitbake -c cleanall <package-name>
 # Limpiar todo
 rm -rf tmp sstate-cache
 ```
+
+## Ejecución automática de TRT Project
+
+El programa `trt_project` es el software que se ejecutará por defecto al arrancar la imagen generada. Este programa puede mostrar información del sistema, versión, autor, o servir como pantalla de bienvenida (About this system).
+
+La integración se realiza mediante una receta Yocto que instala el contenido de la carpeta `trt_project` y configura un servicio systemd para ejecutarlo automáticamente al inicio.
+
+---
+
+## Verificación rápida de recetas Yocto (`test001.sh`)
+
+El script `test001.sh` permite comprobar rápidamente si la receta `trt-project` está correctamente integrada y lista para compilar, sin necesidad de construir toda la imagen.
+
+### ¿Qué hace?
+- Verifica sintaxis y dependencias de la receta (`bitbake -c parse`)
+- Comprueba acceso a fuentes (`bitbake -c fetch`)
+- Intenta compilar solo la receta (`bitbake trt-project`)
+- Muestra variables de entorno relevantes
+- Permite verificar que el archivo y la integración de `trt_project` funcionan correctamente
+
+### Uso
+
+1. Abre una terminal en Linux o WSL (no funciona en PowerShell de Windows)
+2. Navega a la raíz del proyecto:
+   ```bash
+   cd /ruta/a/TU/PROYECTO/TRT_yocto
+   ```
+3. Da permisos de ejecución al script:
+   ```bash
+   chmod +x test001.sh
+   ```
+4. Inicializa el entorno Yocto:
+   ```bash
+   source poky/oe-init-build-env
+   ```
+5. Ejecuta el script:
+   ```bash
+   ./test001.sh
+   ```
+
+Si no hay errores, la receta y el programa `trt_project` están bien integrados y listos para usarse en la imagen.
+
+---

@@ -13,6 +13,19 @@ IMAGE_INSTALL = "\
     ${CORE_IMAGE_EXTRA_INSTALL} \
 "
 
+# Herramientas de red y actualización remota recomendadas
+IMAGE_INSTALL += " \
+    python3 \
+    python3-pip \
+    openssh \
+    curl \
+    wget \
+    rsync \
+    tar \
+    gzip \
+    unzip \
+    "
+
 IMAGE_LINGUAS = " "
 
 LICENSE = "MIT"

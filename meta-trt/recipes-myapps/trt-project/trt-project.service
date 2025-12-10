@@ -1,0 +1,12 @@
+[Unit]
+Description=TRT Project About Program
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/opt/trt_project/start-trt-project.sh
+Restart=on-failure
+User=root
+
+[Install]
+WantedBy=multi-user.target
