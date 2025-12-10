@@ -305,3 +305,6 @@ El script `test001.sh` permite comprobar rápidamente si la receta `trt-project`
 Si no hay errores, la receta y el programa `trt_project` están bien integrados y listos para usarse en la imagen.
 
 ---
+
+## Nota de prueba
+Este es un cambio simple para probar el flujo de commit y push en el repositorio TRT_yocto.
